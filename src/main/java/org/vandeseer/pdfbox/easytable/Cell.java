@@ -1,5 +1,7 @@
 package org.vandeseer.pdfbox.easytable;
 
+import org.apache.pdfbox.pdmodel.font.PDFont;
+
 import java.awt.*;
 import java.util.Optional;
 
@@ -15,6 +17,9 @@ public class Cell {
     private final String text;
     private Color backgroundColor;
     private Color textColor = Color.BLACK;
+
+    private PDFont font = null;
+    private Integer fontSize = null;
 
     private float paddingLeft = 4;
     private float paddingRight = 4;
@@ -202,6 +207,32 @@ public class Cell {
 
     public Cell withTextColor(Color color) {
         this.textColor = color;
+        return this;
+    }
+
+    public PDFont getFont() {
+        return font;
+    }
+
+    public void setFont(PDFont font) {
+        this.font = font;
+    }
+
+    public Integer getFontSize() {
+        return fontSize;
+    }
+
+    public void setFontSize(Integer fontSize) {
+        this.fontSize = fontSize;
+    }
+
+    public Cell withFont(PDFont font) {
+        this.font = font;
+        return this;
+    }
+
+    public Cell withFontSize(int fontSize) {
+        this.fontSize = fontSize;
         return this;
     }
 }
