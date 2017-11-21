@@ -145,7 +145,7 @@ public class TableDrawer {
         contentStream.setFont(font, fontSize);
 
         float xOffset = moveX + cell.getPaddingLeft();
-        final float yOffset = moveY + cell.getPaddingBottom();
+        final float yOffset = moveY + cell.getPaddingBottom() + cell.getPaddingTop();
 
         final float textWidth = (font.getStringWidth(cell.getText()) / 1000f) * fontSize;
 
