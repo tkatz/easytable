@@ -1,6 +1,7 @@
 package org.vandeseer.pdfbox.easytable;
 
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
 
 import java.awt.*;
 import java.io.IOException;
@@ -135,14 +136,18 @@ public class TableDrawer {
     }
 
     private void drawCellText(final Cell cell, final float columnWidth, final float moveX, final float moveY) throws IOException {
+
+        final PDFont font = cell.getFont() != null ? cell.getFont() : table.getFont();
+        final int fontSize = cell.getFontSize() != null ? cell.getFontSize() : table.getFontSize();
+
         contentStream.beginText();
         contentStream.setNonStrokingColor(cell.getTextColor());
-        contentStream.setFont(table.getFont(), table.getFontSize());
+        contentStream.setFont(font, fontSize);
 
         float xOffset = moveX + cell.getPaddingLeft();
-        final float yOffset = moveY + cell.getPaddingBottom();
+        final float yOffset = moveY + cell.getPaddingBottom() + cell.getPaddingTop();
 
-        final float textWidth = (table.getFont().getStringWidth(cell.getText()) / 1000f) * table.getFontSize();
+        final float textWidth = (font.getStringWidth(cell.getText()) / 1000f) * fontSize;
 
         switch (cell.getHorizontalAlignment()){
             case RIGHT:
